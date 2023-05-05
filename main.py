@@ -99,7 +99,7 @@ if topic_input:
 
     llm = load_LLM(openai_api_key=openai_api_key)
 
-    prompt_with_topic = prompt.format(tone=option_tone, dialect=option_dialect, email=topic_input)
+    prompt_with_topic = prompt.format(tone=option_tone, dialect=option_dialect, topic=topic_input)
 
     formatted_blog = llm(prompt_with_topic)
 
