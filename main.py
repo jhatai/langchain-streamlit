@@ -5,7 +5,7 @@ from langchain.llms import OpenAI
 template = """
     
     Your goal is to:
-    - Based on the topic and  a specified tone to create a 500-word blog
+    - Based on the topic and  a specified tone to create a {blog_length}-word blog
     - Convert the blog to a specified dialect
 
     Here are some examples different Tones:
@@ -34,11 +34,13 @@ prompt = PromptTemplate(
     template=template,
 )
 
+
 def load_LLM(openai_api_key):
     """Logic for loading the chain you want to use should go here."""
     # Make sure your openai_api_key is set as an environment variable
     llm = OpenAI(temperature=.7, openai_api_key=openai_api_key)
     return llm
+
 
 st.set_page_config(page_title="Globalize Email", page_icon=":robot:")
 st.header("AI writer for blogs")
@@ -56,9 +58,12 @@ st.header("AI writer for blogs")
 
 st.markdown("## Enter configs to write a blog")
 
+
 def get_api_key():
-    input_text = st.text_input(label="OpenAI API Key ",  placeholder="Ex: sk-2twmA8tfCb8un4...", key="openai_api_key_input")
+    input_text = st.text_input(
+        label="OpenAI API Key ",  placeholder="Ex: sk-2twmA8tfCb8un4...", key="openai_api_key_input")
     return input_text
+
 
 openai_api_key = get_api_key()
 
@@ -67,15 +72,27 @@ with col1:
     option_tone = st.selectbox(
         'Which tone would you like your blog to have?',
         ('Formal', 'Informal'))
-    
+
 with col2:
     option_dialect = st.selectbox(
         'Which English Dialect would you like?',
         ('American', 'British'))
 
+col1, col2 = st.columns(2)
+with col1:
+    test_p  = st.number_input(
+        'Blog length')
+
+with col2:
+    blog_length = st.number_input(
+        'Blog length')
+
+
 def get_text():
-    input_text = st.text_area(label="Topic Input", label_visibility='collapsed', placeholder="Your Topic...", key="topic_input")
+    input_text = st.text_area(label="Topic Input", label_visibility='collapsed',
+                              placeholder="Your Topic...", key="topic_input")
     return input_text
+
 
 topic_input = get_text()
 
@@ -83,22 +100,27 @@ if len(topic_input.split(" ")) > 700:
     st.write("Please enter a shorter topic. The maximum length is 700 words.")
     st.stop()
 
-def update_text_with_example():
-    print ("in updated")
-    st.session_state.topic_input= f"Generating a blog for topic -- {topic_input}"
 
-st.button("*See An Example*", type='secondary', help="Click to see an example of the email you will be converting.", on_click=update_text_with_example)
+def update_text_with_example():
+    print("in updated")
+    st.session_state.topic_input = f"Generating a blog for topic -- {topic_input}"
+
+
+st.button("*See An Example*", type='secondary',
+          help="Click to see an example of the email you will be converting.", on_click=update_text_with_example)
 
 st.markdown("### Your Converted Blog:")
 
 if topic_input:
     if not openai_api_key:
-        st.warning('Please insert OpenAI API Key. Instructions [here](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)', icon="⚠️")
+        st.warning(
+            'Please insert OpenAI API Key. Instructions [here](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)', icon="⚠️")
         st.stop()
 
     llm = load_LLM(openai_api_key=openai_api_key)
 
-    prompt_with_topic = prompt.format(tone=option_tone, dialect=option_dialect, topic=topic_input)
+    prompt_with_topic = prompt.format(
+        tone=option_tone, dialect=option_dialect, topic=topic_input)
 
     formatted_blog = llm(prompt_with_topic)
 
