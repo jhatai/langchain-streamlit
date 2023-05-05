@@ -30,7 +30,7 @@ template = """
 """
 
 prompt = PromptTemplate(
-    input_variables=["tone", "dialect", "topic","blog_length"],
+    input_variables=["tone", "dialect", "topic", "blog_length"],
     template=template,
 )
 
@@ -85,7 +85,7 @@ with col1:
 
 with col2:
     length_input = st.number_input(
-        'Blog length')
+        'Blog length', min_value=100, max_value=2000, value=100, step=1)
 
 
 def get_text():
@@ -126,4 +126,4 @@ if topic_input:
 
     st.write(formatted_blog)
 
-## todo 1. write page title and description 2. Add options applied
+# todo 1. write page title and description 2. Add options applied
