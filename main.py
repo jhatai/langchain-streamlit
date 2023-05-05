@@ -3,7 +3,7 @@ from langchain import PromptTemplate
 from langchain.llms import OpenAI
 
 template = """
-    Below is a blog that may be poorly worded.
+    
     Your goal is to:
     - Based on the topic and  a specified tone to create a 500-word blog
     - Convert the blog to a specified dialect
@@ -21,7 +21,7 @@ template = """
     - British: Well, I popped down to the local shop just the other day to pick up a few bits and bobs. As I was perusing the aisles, I noticed that they were fresh out of biscuits, which was a bit of a disappointment, as I do love a good cuppa with a biscuit or two.
 
         
-    Below is the blog, tone, and dialect:
+    Below is the topic, tone, and dialect:
     TONE: {tone}
     DIALECT: {dialect}
     Topic: {topic}
