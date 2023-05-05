@@ -56,7 +56,7 @@ st.header("AI writer for blogs")
 # with col2:
 #     st.image(image='TweetScreenshot.png', width=500, caption='https://twitter.com/DannyRichman/status/1598254671591723008')
 
-st.markdown("## Enter Your Email To Convert")
+st.markdown("## Enter configs to write a blog")
 
 def get_api_key():
     input_text = st.text_input(label="OpenAI API Key ",  placeholder="Ex: sk-2twmA8tfCb8un4...", key="openai_api_key_input")
@@ -76,7 +76,7 @@ with col2:
         ('American', 'British'))
 
 def get_text():
-    input_text = st.text_area(label="Email Input", label_visibility='collapsed', placeholder="Your Email...", key="email_input")
+    input_text = st.text_area(label="Topic Input", label_visibility='collapsed', placeholder="Your Email...", key="email_input")
     return input_text
 
 email_input = get_text()
