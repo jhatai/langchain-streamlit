@@ -125,3 +125,5 @@ if topic_input:
     formatted_blog = llm(prompt_with_topic)
 
     st.write(formatted_blog)
+
+## todo 1. write page title and description 2. Add options applied
