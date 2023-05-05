@@ -107,10 +107,10 @@ def update_text_with_example():
     st.session_state.topic_input = f"Generating a blog for topic -- {topic_input}"
 
 
-st.button("*See An Example*", type='secondary',
+st.button("*Execute..*", type='secondary',
           help="Click to see an example of the email you will be converting.", on_click=update_text_with_example)
 
-st.markdown("### Your Converted Blog:")
+st.markdown("### Suggestion from AI writer:")
 
 def generate_response(prompt):
     completions = openai.Completion.create(
