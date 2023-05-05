@@ -6,7 +6,7 @@ import openai
 template = """
     
     Your goal is to:
-    - Based on the topic and  a specified tone to create a {blog_length}-word blog
+    - Use {tone} voice and tone. Based on the topic and  a specified tone to create a {blog_length}-word blog
     - Convert the blog to a specified dialect
 
     Here are some examples different Tones:
@@ -72,7 +72,7 @@ col1, col2 = st.columns(2)
 with col1:
     option_tone = st.selectbox(
         'Which tone would you like your blog to have?',
-        ('Formal', 'Informal'))
+        ('professional', 'conversational','humorous','empathic','academic','casual','creative'))
 
 with col2:
     option_dialect = st.selectbox(
@@ -138,7 +138,7 @@ if topic_input:
     # formatted_blog = llm(prompt_with_topic)
 
     # st.write(formatted_blog)
-    st.write(generate_response(prompt_with_topic))
+    st.code(generate_response(prompt_with_topic))
 
     
 
