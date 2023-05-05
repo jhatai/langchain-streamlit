@@ -94,7 +94,7 @@ def get_text():
                               placeholder="Your Topic...", key="topic_input")
     return input_text
 
-
+st.text('Tell me the topic you are interested in...')
 topic_input = get_text()
 
 if len(topic_input.split(" ")) > 700:
