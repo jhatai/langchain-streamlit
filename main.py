@@ -43,7 +43,7 @@ def load_LLM(openai_api_key):
     return llm
 
 st.set_page_config(page_title="Globalize Email", page_icon=":robot:")
-st.header("Globalize Text")
+st.header("AI writer for blogs")
 
 # col1, col2 = st.columns(2)
 
