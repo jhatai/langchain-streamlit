@@ -3,11 +3,11 @@ from langchain import PromptTemplate
 from langchain.llms import OpenAI
 
 template = """
-    Below is an email that may be poorly worded.
+    Below is a blog that may be poorly worded.
     Your goal is to:
     - Properly format the email
-    - Convert the input text to a specified tone
-    - Convert the input text to a specified dialect
+    - Based on the topic and  a specified tone to create a 500-word blog
+    - Convert the blog to a specified dialect
 
     Here are some examples different Tones:
     - Formal: We went to Barcelona for the weekend. We have a lot of things to tell you.
@@ -21,18 +21,17 @@ template = """
     - American: I headed straight for the produce section to grab some fresh vegetables, like bell peppers and zucchini. After that, I made my way to the meat department to pick up some chicken breasts.
     - British: Well, I popped down to the local shop just the other day to pick up a few bits and bobs. As I was perusing the aisles, I noticed that they were fresh out of biscuits, which was a bit of a disappointment, as I do love a good cuppa with a biscuit or two.
 
-    Please start the email with a warm introduction. Add the introduction if you need to.
-    
-    Below is the email, tone, and dialect:
+        
+    Below is the blog, tone, and dialect:
     TONE: {tone}
     DIALECT: {dialect}
-    EMAIL: {email}
+    Topic: {topic}
     
     YOUR {dialect} RESPONSE:
 """
 
 prompt = PromptTemplate(
-    input_variables=["tone", "dialect", "email"],
+    input_variables=["tone", "dialect", "topic"],
     template=template,
 )
 
@@ -67,7 +66,7 @@ openai_api_key = get_api_key()
 col1, col2 = st.columns(2)
 with col1:
     option_tone = st.selectbox(
-        'Which tone would you like your email to have?',
+        'Which tone would you like your blog to have?',
         ('Formal', 'Informal'))
     
 with col2:
@@ -76,32 +75,32 @@ with col2:
         ('American', 'British'))
 
 def get_text():
-    input_text = st.text_area(label="Topic Input", label_visibility='collapsed', placeholder="Your Email...", key="email_input")
+    input_text = st.text_area(label="Topic Input", label_visibility='collapsed', placeholder="Your Topic...", key="topic_input")
     return input_text
 
-email_input = get_text()
+topic_input = get_text()
 
-if len(email_input.split(" ")) > 700:
-    st.write("Please enter a shorter email. The maximum length is 700 words.")
+if len(topic_input.split(" ")) > 700:
+    st.write("Please enter a shorter topic. The maximum length is 700 words.")
     st.stop()
 
 def update_text_with_example():
     print ("in updated")
-    st.session_state.email_input = "Sally I am starts work at yours monday from dave"
+    st.session_state.topic_input= "Sally I am starts work at yours monday from dave"
 
 st.button("*See An Example*", type='secondary', help="Click to see an example of the email you will be converting.", on_click=update_text_with_example)
 
-st.markdown("### Your Converted Email:")
+st.markdown("### Your Converted Blog:")
 
-if email_input:
+if topic_input:
     if not openai_api_key:
         st.warning('Please insert OpenAI API Key. Instructions [here](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)', icon="⚠️")
         st.stop()
 
     llm = load_LLM(openai_api_key=openai_api_key)
 
-    prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
+    prompt_with_topic = prompt.format(tone=option_tone, dialect=option_dialect, email=topic_input)
 
-    formatted_email = llm(prompt_with_email)
+    formatted_blog = llm(prompt_with_topic)
 
-    st.write(formatted_email)
+    st.write(formatted_blog)
