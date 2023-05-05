@@ -80,11 +80,11 @@ with col2:
 
 col1, col2 = st.columns(2)
 with col1:
-    test_p  = st.number_input(
+    test_p = st.number_input(
         'Blog length')
 
 with col2:
-    blog_length = st.number_input(
+    length_input = st.number_input(
         'Blog length')
 
 
@@ -119,8 +119,8 @@ if topic_input:
 
     llm = load_LLM(openai_api_key=openai_api_key)
 
-    prompt_with_topic = prompt.format(
-        tone=option_tone, dialect=option_dialect, topic=topic_input)
+    prompt_with_topic = prompt.format(blog_length=length_input,
+                                      tone=option_tone, dialect=option_dialect, topic=topic_input)
 
     formatted_blog = llm(prompt_with_topic)
 
