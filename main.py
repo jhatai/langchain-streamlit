@@ -68,7 +68,7 @@ def get_api_key():
 
 openai_api_key = get_api_key()
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 with col1:
     option_tone = st.selectbox(
         'Which tone would you like your blog to have?',
@@ -79,14 +79,14 @@ with col2:
         'Which English Dialect would you like?',
         ('American', 'British'))
 
-col1, col2 = st.columns(2)
-with col1:
-    test_p = st.number_input(
-        'test col')
+# col1, col2 = st.columns(2)
+# with col1:
+#     test_p = st.number_input(
+#         'test col')
 
-with col2:
+with col3:
     length_input = st.number_input(
-        'Blog length', min_value=100, max_value=2000, value=100, step=1)
+        'Blog length', min_value=100, max_value=1000, value=100, step=1)
 
 
 def get_text():
