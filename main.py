@@ -5,7 +5,6 @@ from langchain.llms import OpenAI
 template = """
     Below is a blog that may be poorly worded.
     Your goal is to:
-    - Properly format the email
     - Based on the topic and  a specified tone to create a 500-word blog
     - Convert the blog to a specified dialect
 
