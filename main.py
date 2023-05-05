@@ -85,7 +85,7 @@ if len(topic_input.split(" ")) > 700:
 
 def update_text_with_example():
     print ("in updated")
-    st.session_state.topic_input= "Sally I am starts work at yours monday from dave"
+    st.session_state.topic_input= f"Generating a blog for topic -- {topic_input}"
 
 st.button("*See An Example*", type='secondary', help="Click to see an example of the email you will be converting.", on_click=update_text_with_example)
 
