@@ -71,12 +71,12 @@ openai_api_key = get_api_key()
 col1, col2, col3 = st.columns(3)
 with col1:
     option_tone = st.selectbox(
-        'Which tone would you like your blog to have?',
+        'Which tone ?',
         ('professional', 'conversational','humorous','empathic','academic','casual','creative'))
 
 with col2:
     option_dialect = st.selectbox(
-        'Which English Dialect would you like?',
+        'Which English Dialect?',
         ('American', 'British'))
 
 # col1, col2 = st.columns(2)
