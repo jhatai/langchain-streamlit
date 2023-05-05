@@ -1,6 +1,7 @@
 import streamlit as st
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
+import openai
 
 template = """
     
@@ -38,7 +39,7 @@ prompt = PromptTemplate(
 def load_LLM(openai_api_key):
     """Logic for loading the chain you want to use should go here."""
     # Make sure your openai_api_key is set as an environment variable
-    llm = OpenAI(temperature=.7, openai_api_key=openai_api_key)
+    llm = OpenAI(temperature=.7, openai_api_key=openai_api_key )
     return llm
 
 
@@ -111,19 +112,34 @@ st.button("*See An Example*", type='secondary',
 
 st.markdown("### Your Converted Blog:")
 
+def generate_response(prompt):
+    completions = openai.Completion.create(
+        engine = "text-davinci-003",
+        prompt = prompt,
+        max_tokens = 1024,
+        n = 1,
+        stop = None,
+        temperature=0.5,
+    )
+    message = completions.choices[0].text
+    return message 
+
 if topic_input:
     if not openai_api_key:
         st.warning(
             'Please insert OpenAI API Key. Instructions [here](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)', icon="⚠️")
         st.stop()
 
-    llm = load_LLM(openai_api_key=openai_api_key)
+    # llm = load_LLM(openai_api_key=openai_api_key)
 
     prompt_with_topic = prompt.format(blog_length=length_input,
                                       tone=option_tone, dialect=option_dialect, topic=topic_input)
 
-    formatted_blog = llm(prompt_with_topic)
+    # formatted_blog = llm(prompt_with_topic)
 
-    st.write(formatted_blog)
+    # st.write(formatted_blog)
+    st.write(generate_response(prompt_with_topic))
+
+    
 
 # todo 1. write page title and description 2. Add options applied
