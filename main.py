@@ -45,7 +45,7 @@ def load_LLM(openai_api_key):
 
 st.set_page_config(page_title="Globalize Email", page_icon=":robot:")
 st.header("AI writer for blogs")
-img_url = "https://media.discordapp.net/attachments/941971306004504638/1104198518287114240/HHT_style_close-up_shot__genre_gourmet__emotion_tempting__scene_b8f5ba2f-2758-457f-a866-579342027b09.png?width=891&height=593"
+img_url = "https://media.discordapp.net/attachments/941971306004504638/1104201199181373550/HHT_style_close-up_shot__genre_gourmet__emotion_tempting__scene_255a9415-94e4-40e6-b92e-2c5f021c69b1.png?width=891&height=593"
 st.image(image=img_url, use_column_width='auto')
 
 # col1, col2 = st.columns(2)
